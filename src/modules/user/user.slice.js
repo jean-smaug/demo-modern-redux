@@ -16,10 +16,8 @@ const initialState = {
 export const userSelector = userAdapter.getSelectors();
 
 // ASYNC THUNKS
-const fetchUsers = createAsyncThunk("fetchUsers", async () => {
-  const response = await fetch(
-    "http://jsonplaceholder.typicode.com/users/23121412"
-  );
+const fetchUsers = createAsyncThunk("users/fetchUsers", async () => {
+  const response = await fetch("http://jsonplaceholder.typicode.com/users");
 
   if (response.status !== 200) {
     throw new Error(response.statusText);

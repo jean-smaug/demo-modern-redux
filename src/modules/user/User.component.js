@@ -3,7 +3,9 @@ import { useSelector } from "react-redux";
 import { userSelector } from "./user.slice";
 
 const User = ({ userId }) => {
-  const user = useSelector((state) => userSelector.selectById(state, userId));
+  const user = useSelector((state) =>
+    userSelector.selectById(state.users, userId)
+  );
 
   if (!user) return null;
 
