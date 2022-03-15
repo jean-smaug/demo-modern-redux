@@ -1,32 +1,30 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { userActions } from "./user.slice";
+import { userActions, userSelector } from "./user.slice";
 import UserList from "./UserList.component";
 
 const UserContainer = () => {
-  const status = useSelector((state) => state.users.status);
+  const status = useSelector(userSelector.selectStatus);
   const dispatch = useDispatch();
 
-  React.useEffect(() => {
+  const handleClick = () => {
     dispatch(userActions.fetchUsers());
-  }, [dispatch]);
+  };
 
-  switch (status) {
-    case "idle":
-      return "";
-
-    case "pending":
-      return "Chargement...";
-
-    case "failure":
-      return "Merde...";
-
-    case "success":
-      return <UserList usersIds={[1, 2, 3, 4, 5]} />;
-
-    default:
-      throw new Error(`Unhandeled case : ${status}`);
-  }
+  return (
+    <>
+      <button onClick={handleClick}>Fetch</button>
+      {status === "idle" ? (
+        "Rien"
+      ) : status === "pending" ? (
+        "Chargement"
+      ) : status === "failure" ? (
+        "Merde"
+      ) : status === "success" ? (
+        <UserList usersIds={[1, 2, 3, 4, 5]} />
+      ) : null}
+    </>
+  );
 };
 
 export default UserContainer;

@@ -13,18 +13,38 @@ const initialState = {
 };
 
 // SELECTORS
-export const userSelector = userAdapter.getSelectors();
+
+const selectStatus = ({ users }) => {
+  return users.status;
+};
+
+export const userSelector = { ...userAdapter.getSelectors(), selectStatus };
 
 // ASYNC THUNKS
-const fetchUsers = createAsyncThunk("users/fetchUsers", async () => {
-  const response = await fetch("http://jsonplaceholder.typicode.com/users");
+const fetchUsers = createAsyncThunk(
+  "users/fetchUsers",
+  async () => {
+    const response = await fetch("http://jsonplaceholder.typicode.com/users");
 
-  if (response.status !== 200) {
-    throw new Error(response.statusText);
+    if (response.status !== 200) {
+      throw new Error(response.statusText);
+    }
+
+    await new Promise((res) => {
+      setTimeout(() => {
+        res();
+      }, 2000);
+    });
+
+    return await response.json();
+  },
+  {
+    condition: (_arg, api) => {
+      const status = selectStatus(api.getState());
+      return status !== "pending" && status !== "success";
+    },
   }
-
-  return await response.json();
-});
+);
 
 // SLICE
 export const userSlice = createSlice({

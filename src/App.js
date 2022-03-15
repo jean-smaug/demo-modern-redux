@@ -5,7 +5,6 @@ import UserContainer from "./modules/user/UserContainer.component";
 function App() {
   return (
     <div>
-      azeazeaz
       <UserContainer />
     </div>
   );
