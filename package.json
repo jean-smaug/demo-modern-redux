@@ -14,7 +14,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start:new": "REACT_APP_VERSION=new react-scripts start",
+    "start:old": "REACT_APP_VERSION=old react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

@@ -1,4 +1,5 @@
 // actions
+export const FETCH_USER_START = "user/FETCH_USER_START";
 export const FETCH_USER_SUCCESS = "user/FETCH_USER_SUCCESS";
 
 const fetchUserSuccess = (users) => {
@@ -9,6 +10,8 @@ const fetchUserSuccess = (users) => {
 };
 
 export const fetchUsers = () => async (dispatch) => {
+  dispatch({ type: FETCH_USER_START });
+
   const response = await fetch("http://jsonplaceholder.typicode.com/users");
 
   if (response.status !== 200) {

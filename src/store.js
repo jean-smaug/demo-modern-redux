@@ -5,7 +5,8 @@ import { userReducer } from "./modules/user-old/user.reducer";
 
 export const store = configureStore({
   reducer: {
-    users: process.env.APP_VERSION === "new" ? userSlice.reducer : userReducer,
+    users:
+      process.env.REACT_APP_VERSION === "new" ? userSlice.reducer : userReducer,
     todos: todoSlice.reducer,
   },
 });
