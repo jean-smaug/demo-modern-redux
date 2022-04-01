@@ -8,7 +8,7 @@ import {
 const userAdapter = createEntityAdapter();
 const initialState = {
   ...userAdapter.getInitialState(),
-  status: "idle",
+  status: "idle", // "idle" | "pending" | "success" | "failure"
   error: null,
 };
 
